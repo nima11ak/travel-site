@@ -5,9 +5,10 @@ def index_view(request):
     return render(request,'trip/index.html')
 
 def about_view(request):
-    return render(request,'about.html')
+    return render(request,'trip/about.html')
 
 def contact_view(request):
-    return render(request,'contact.html')
+    return render(request,'trip/contact.html')
 
-
+def elements_view(request):
+    return render(request,'trip/elements.html')
