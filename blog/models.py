@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+from django.utils.text import Truncator
+
 
 class category(models.Model):
     name = models.CharField(max_length=255)
@@ -20,6 +22,10 @@ class Post(models.Model):
     published_date = models.DateTimeField(null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+
+
+    def excerpt(self, words=5):
+        return Truncator(self.body).words(words, truncate='...')
 
     class Meta:
         ordering = ['-created_date']
@@ -53,3 +59,6 @@ class Post(models.Model):
             ).order_by('-created_date').first()
         except Post.DoesNotExist:
             return None
+        
+
+
