@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.db import models
-from blog.models import Post
+from blog.models import Post,Category
 
 def blog_view(request):
     """
@@ -54,3 +54,10 @@ def blog_single(request, pid):
 
 def test(request):
     return render(request,'test.html')
+
+
+def blog_category(request,cat_name):
+    posts = Post.objects.filter(status=1)
+    posts = posts.filter(category__name=cat_name)
+    context = {'posts': posts} 
+    return render(request, 'blog/blog-home.html', context)
