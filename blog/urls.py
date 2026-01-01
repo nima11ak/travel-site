@@ -7,6 +7,7 @@ urlpatterns = [
     path("", blog_view, name="blog"),
     path("<int:pid>/", blog_single, name="single"),
     path("category/<str:cat_name>/", blog_category, name="category"),
+    path("author/<str:author_username>/", blog_view, name="author"),
     path('test',test,name='test' )
     
 ]

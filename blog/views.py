@@ -2,11 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from django.db import models
 from blog.models import Post,Category
 
-def blog_view(request):
+def blog_view(request,author_username=None):
     """
     نمایش لیست همه پست‌های منتشر شده
     """
     posts = Post.objects.filter(status=1)
+    if author_username:
+        posts= posts.filter(author__username=author_username)
     context = {'posts': posts} 
     return render(request, 'blog/blog-home.html', context)
 
